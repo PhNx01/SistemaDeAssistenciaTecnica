@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<lombok.version>1.18.30</lombok.version> <!-- Propriedade para a versão do Lombok -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -41,6 +42,21 @@
 			<version>${lombok.version}</version>
 			<scope>provided</scope> <!-- Mudança para 'provided' é uma boa prática com o plugin -->
 		</dependency>
+
+		<!-- SpringDoc OpenAPI starter para Spring Boot 3 (UI incluido) -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
+		<!-- Opcional: anotações Swagger/OpenAPI (útil para @Schema, etc.) -->
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.10</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -54,6 +70,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.example.Sistema.SistemaApplication</mainClass>
+				</configuration>
 			</plugin>
 			<!-- Plugin do Compilador configurado explicitamente -->
 			<plugin>
@@ -70,6 +89,15 @@
 							<version>${lombok.version}</version>
 						</path>
 					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<!-- Configurar encoding de recursos para UTF-8 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.3.1</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 		</plugins>
